@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\LivreController;
+use App\Http\Controllers\API\V1\LivreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class LivreController extends Controller
@@ -11,7 +12,7 @@ class LivreController extends Controller
      */
     public function index()
     {
-        return "un livre";
+        return "yes";
     }
 
     /**
@@ -27,7 +28,7 @@ class LivreController extends Controller
      */
     public function show(string $id)
     {
-        return "sup" . $id;
+        //
     }
 
     /**
