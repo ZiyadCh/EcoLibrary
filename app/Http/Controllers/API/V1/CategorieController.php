@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Livre;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 
-class LivreController extends Controller
+class CategorieController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Livre::all();
+        //
     }
 
     /**
@@ -21,23 +21,22 @@ class LivreController extends Controller
      */
     public function store(Request $request)
     {
+        //
         $data = $request->validate([
-            'titre' => 'string|required|max:255',
-            'auteur' => 'string|required|max:255',
+            'name' => 'string|required|max:255',
         ]);
 
-        $livre = Livre::create($data);
+        $category = Categorie::create($data);
 
-        return response()->json($livre);
+        return response()->json($category);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $titre)
+    public function show(string $id)
     {
-        $livre = Livre::where('titre', $titre)->get();
-        return $livre;
+        //
     }
 
     /**

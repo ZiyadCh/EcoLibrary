@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V1\LivreController as V1LivreController;
 use App\Http\Controllers\API\V2\LivreController as V2LivreController;
+use App\Http\Controllers\API\V1\CategorieController as V1CategorieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,4 +13,8 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('livres', V1LivreController::class);
+});
+
+Route::prefix('v1')->group(function () {
+    Route::apiResource('categorie', V1CategorieController::class);
 });
