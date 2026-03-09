@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V2;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,15 +12,7 @@ class LivreController extends Controller
      */
     public function index()
     {
-        return response()->json(
-            [
-                'data' => [
-                    'name' => 'ziyad',
-                    'location' => 'casablanca',
-                ],
-            ],
-            202
-        );
+        //
     }
 
     /**
