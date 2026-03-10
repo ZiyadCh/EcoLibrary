@@ -33,9 +33,14 @@ class LivreController extends Controller
         return response()->json($livre, 201);
     }
 
-    public function show(string $id)
+    public function show($id)
     {
         return Livre::findOrFail($id);
+    }
+
+    public function findByTitre($titre)
+    {
+        return Livre::where('titre', $titre)->first();
     }
     /**
      * @return JsonResponse

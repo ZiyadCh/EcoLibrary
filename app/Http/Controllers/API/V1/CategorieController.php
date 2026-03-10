@@ -36,6 +36,11 @@ class CategorieController extends Controller
     {
         return Categorie::findOrFail($id);
     }
+
+    public function findByName($name)
+    {
+        return Categorie::where('name', $name)->first();
+    }
     /**
      * @return JsonResponse
      */
