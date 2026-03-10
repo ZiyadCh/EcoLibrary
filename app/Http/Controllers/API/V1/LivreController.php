@@ -17,6 +17,11 @@ class LivreController extends Controller
     {
         return Livre::all();
     }
+
+    public function popularity()
+    {
+        return Livre::orderBy('nbr_visite', 'desc')->get();
+    }
     /**
      * @return JsonResponse
      */
@@ -55,7 +60,7 @@ class LivreController extends Controller
         $data = $request->validate([
             'titre' => 'string|sometimes|max:255',
             'auteur' => 'string|sometimes|max:255',
-            'category_id' => 'integer|sometimes|exists:categories,id',
+            'category_id' => 'integer',
         ]);
 
         $livre->update($data);
