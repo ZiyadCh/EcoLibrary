@@ -4,56 +4,64 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Livre;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class LivreController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @return Collection<int,Livre>
      */
     public function index()
     {
         return Livre::all();
     }
-
     /**
-     * Store a newly created resource in storage.
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $data = $request->validate([
             'titre' => 'string|required|max:255',
             'auteur' => 'string|required|max:255',
-            'category_id' => 'integer|required',
+            'category_id' => 'integer|required|exists:categories,id',
         ]);
 
         $livre = Livre::create($data);
 
-        return response()->json($livre);
+        return response()->json($livre, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $titre)
+    public function show(string $id)
     {
-        $livre = Livre::where('titre', $titre)->get();
-        return $livre;
+        return Livre::findOrFail($id);
     }
-
     /**
-     * Update the specified resource in storage.
+     * @return JsonResponse
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $livre = Livre::findOrFail($id);
 
+        $data = $request->validate([
+            'titre' => 'string|sometimes|max:255',
+            'auteur' => 'string|sometimes|max:255',
+            'category_id' => 'integer|sometimes|exists:categories,id',
+        ]);
+
+        $livre->update($data);
+
+        return response()->json($livre);
+    }
     /**
-     * Remove the specified resource from storage.
+     * @return JsonResponse
      */
     public function destroy(string $id)
     {
-        //
+        $livre = Livre::findOrFail($id);
+        $livre->delete();
+
+        return response()->json(['message' => 'Livre deleted successfully'], 200);
     }
 }

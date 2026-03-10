@@ -4,54 +4,60 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CategorieController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @return Collection<int,Categorie>
      */
     public function index()
     {
-        //
+        return Categorie::all();
     }
-
     /**
-     * Store a newly created resource in storage.
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
-        //
         $data = $request->validate([
             'name' => 'string|required|max:255',
         ]);
 
         $category = Categorie::create($data);
 
-        return response()->json($category);
+        return response()->json($category, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        return Categorie::findOrFail($id);
     }
-
     /**
-     * Update the specified resource in storage.
+     * @return JsonResponse
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $category = Categorie::findOrFail($id);
 
+        $data = $request->validate([
+            'name' => 'string|required|max:255',
+        ]);
+
+        $category->update($data);
+
+        return response()->json($category);
+    }
     /**
-     * Remove the specified resource from storage.
+     * @return JsonResponse
      */
     public function destroy(string $id)
     {
-        //
+        $category = Categorie::findOrFail($id);
+        $category->delete();
+
+        return response()->json(['message' => 'Deleted successfully']);
     }
 }
