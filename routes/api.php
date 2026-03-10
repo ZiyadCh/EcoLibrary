@@ -17,9 +17,13 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('livres', V1LivreController::class);
+    Route::post('/login', [V1AuthController::class,'login']);
 });
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('categorie', V1CategorieController::class);
+    Route::apiResource('livres', V1LivreController::class)->middleware('auth:sanctum');
+});
+
+Route::prefix('v1')->group(function () {
+    Route::apiResource('categorie', V1CategorieController::class)->middleware('auth:sanctum');
 });
