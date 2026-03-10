@@ -22,6 +22,7 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('livres', V1LivreController::class)->middleware('auth:sanctum');
+    Route::get('livres/titre/{titre}', [V1LivreController::class,'findByTitre'])->middleware('auth:sanctum');
 });
 
 Route::prefix('v1')->group(function () {

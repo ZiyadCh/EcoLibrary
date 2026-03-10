@@ -35,7 +35,10 @@ class LivreController extends Controller
 
     public function show($id)
     {
-        return Livre::findOrFail($id);
+        $livre = Livre::findOrFail($id);
+        $livre->increment('nbr_visite');
+        $livre->save();
+        return $livre;
     }
 
     public function findByTitre($titre)
