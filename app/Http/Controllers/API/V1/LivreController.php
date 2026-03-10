@@ -30,7 +30,7 @@ class LivreController extends Controller
         $data = $request->validate([
             'titre' => 'string|required|max:255',
             'auteur' => 'string|required|max:255',
-            'category_id' => 'integer|required|exists:categories,id',
+            'category_id' => 'integer|required',
         ]);
 
         $livre = Livre::create($data);
