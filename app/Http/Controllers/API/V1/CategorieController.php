@@ -65,9 +65,13 @@ class CategorieController extends Controller
     {
         $category = Categorie::find($id);
         if ($category) {
-            return $category->livres;
+            return [
+                "Liste des livres dans la categorie " . $category->name,
+                $category->livres,
+            ];
+
         } else {
-            return "introuvable";
+            return "categorie introuvable";
         }
     }
 }
