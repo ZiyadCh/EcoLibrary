@@ -26,4 +26,5 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('categorie', V1CategorieController::class)->middleware('auth:sanctum');
+    Route::get('categorie/livres/{id}', [V1CategorieController::class,'listLivres'])->middleware('auth:sanctum');
 });

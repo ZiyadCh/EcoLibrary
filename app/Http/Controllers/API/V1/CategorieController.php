@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
+use App\Models\Livre;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -59,5 +60,14 @@ class CategorieController extends Controller
         $category->delete();
 
         return response()->json(['message' => 'Deleted successfully']);
+    }
+    public function listLivres(int $id)
+    {
+        $category = Categorie::find($id);
+        if ($category) {
+            return $category->livres;
+        } else {
+            return "introuvable";
+        }
     }
 }

@@ -13,6 +13,6 @@ class Categorie extends Model
 
     public function livres()
     {
-        return $this->hasMany(Livre::class);
+        return $this->hasMany(Livre::class, 'category_id');
     }
 }
