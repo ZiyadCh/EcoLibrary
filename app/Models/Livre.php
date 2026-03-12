@@ -9,6 +9,7 @@ class Livre extends Model
     protected $fillable = [
         'titre',
         'auteur',
+        'role',
         'category_id',
     ];
     public function category()
